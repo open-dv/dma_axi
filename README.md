@@ -11,3 +11,7 @@ cd dma_axi
 vlib work
 vlog -sv filelist
 ```
+Steps to open simulator(ModelSim/QuestaSim):
+```
+vsim -novopt dma_axi64
+```
