@@ -5,7 +5,9 @@ This project is an attempt to create an SV based testbench around DMA AXI.
 RTL source:
 https://opencores.org/projects/dma_axi
 
-Steps to compile:
+Steps to compile(ModelSim/QuestaSim):
 ```
-
+cd dma_axi
+vlib work
+vlog -sv filelist
 ```
