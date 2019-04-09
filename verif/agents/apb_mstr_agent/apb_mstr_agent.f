@@ -1,0 +1,10 @@
++incdir+./verif/
++incdir+./verif/agents/apb_mstr_agent/
++incdir+./verif/env/apb_mstr_env/
++incdir+./verif/sequence_lib/apb_mstr_sequence_lib/
++incdir+./verif/tests/
+verif/agents/apb_mstr_agent/apb_interface.sv
+verif/agents/apb_mstr_agent/apb_agent_pkg.sv
+verif/env/apb_mstr_env/apb_env_pkg.sv
+verif/sequence_lib/apb_mstr_sequence_lib/apb_seq_lib_pkg.sv
+verif/tests/apb_test_pkg.sv
