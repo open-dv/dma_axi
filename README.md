@@ -9,9 +9,16 @@ Steps to compile(ModelSim/QuestaSim):
 ```
 cd dma_axi
 vlib work
-vlog -sv filelist
+vlog -novopt -sv .\filelist -f verif/agents/apb_mstr_agent/apb_mstr_agent.f .\verif\dma_axi
+_dv.f  -timescale 1ns/1ps
 ```
-Steps to open simulator(ModelSim/QuestaSim):
+Running test:
 ```
-vsim -novopt dma_axi64
+vsim -novopt tb_top -c +UVM_TESTNAME=apb_directed_reg_write_read_test -do "log tb_top/* -r;
+ run -all"
+```
+
+Steps to open waveform(ModelSim/QuestaSim):
+```
+vsim -view .\vsim.wlf
 ```
