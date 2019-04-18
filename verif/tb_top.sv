@@ -42,7 +42,7 @@ module tb_top();
     // 100MHz clock generation block
     initial begin
         forever begin
-            #((0.5/`APB_CLK_FREQ_MHZ) * 1s) clk_100MHz = ~clk_100MHz;
+            #(5ns) clk_100MHz = ~clk_100MHz;
         end
     end
 

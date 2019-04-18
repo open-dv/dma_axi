@@ -24,45 +24,14 @@ class apb_directed_reg_write_read_test extends apb_base_test;
         
         super.run_phase(phase);        
         phase.raise_objection(this);
-            wr_data_2_mem('h1048, 1'b1, 0, 0);
-			wr_data_2_mem('h10, 'h84010001, 0, 0);
-			wr_data_2_mem('h14, 'h84010001, 0, 0);
-			wr_data_2_mem('h08, 'hF, 0, 0);
-			wr_data_2_mem('h40, 'h1, 0, 0);
-			wr_data_2_mem('h44, 'h1, 0, 0);
-			// Write all memories with low range directed data
-            /*for(int i=0; i< `APB_SRAM_SIZE; i++) begin
-                wr_data_2_mem(i, i, 0, 0);
-            end
-            // read all memories after write
-            for(int i=0; i< `APB_SRAM_SIZE; i++) begin
-                rd_data_4m_mem(i, 0);
-            end
-            // Write all memories with mid range directed data
-            for(int i=0; i< `APB_SRAM_SIZE; i++) begin
-                wr_data_2_mem(i, mid_data_val+i, 0, 0);
-            end
-            // read all memories after write
-            for(int i=0; i< `APB_SRAM_SIZE; i++) begin
-                rd_data_4m_mem(i, 0);
-            end
-            // Write all memories with mid high range directed data
-            for(int i=0; i< `APB_SRAM_SIZE; i++) begin
-                wr_data_2_mem(i, mid_high_data_val+i, 0, 0);
-            end
-            // read all memories after write
-            for(int i=0; i< `APB_SRAM_SIZE; i++) begin
-                rd_data_4m_mem(i, 0);
-            end
-            // Write all memories with high range directed data
-            for(int i=0; i< `APB_SRAM_SIZE; i++) begin
-                wr_data_2_mem(i, high_data_val+i, 0, 0);
-            end
-            // read all memories after write
-            for(int i=0; i< `APB_SRAM_SIZE; i++) begin
-                rd_data_4m_mem(i, 0);
-            end
-			*/
+            wr_data_2_mem('h1048, 1'b1, 0, 0); // CH start
+			wr_data_2_mem('h10, 'h8401000F, 0, 0); // Static 0
+			wr_data_2_mem('h14, 'hC401000F, 0, 0); // Static 1
+			wr_data_2_mem('h08, 'hF, 0, 0); // CMD2
+			wr_data_2_mem('h0C, 'h2, 0, 0); // CMD3
+			wr_data_2_mem('h40, 'h1, 0, 0); // CH Enable 
+			wr_data_2_mem('h44, 'h1, 0, 0); // CH Start
+			#2000ns;
         phase.drop_objection(this);
     endtask: run_phase
     
