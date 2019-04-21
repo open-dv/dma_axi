@@ -25,8 +25,9 @@ class apb_directed_reg_write_read_test extends apb_base_test;
         super.run_phase(phase);        
         phase.raise_objection(this);
             wr_data_2_mem('h1048, 1'b1, 0, 0); // CH start
-			wr_data_2_mem('h10, 'h8401000F, 0, 0); // Static 0
-			wr_data_2_mem('h14, 'hC401000F, 0, 0); // Static 1
+			wr_data_2_mem('h10, 'h84032008, 0, 0); // Static 0
+			wr_data_2_mem('h14, 'hC4032008, 0, 0); // Static 1
+			wr_data_2_mem('h20, 'h10001, 0, 0); // Static 1
 			wr_data_2_mem('h08, 'hF, 0, 0); // CMD2
 			wr_data_2_mem('h0C, 'h2, 0, 0); // CMD3
 			wr_data_2_mem('h40, 'h1, 0, 0); // CH Enable 

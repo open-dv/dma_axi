@@ -38,7 +38,8 @@ module tb_top();
 	
     // interface declaration
     apb_interface   apb_intf(clk_100MHz);
-    
+    dma_perf_interface dma_perf_intf(clk_100MHz);
+	
     // 100MHz clock generation block
     initial begin
         forever begin
@@ -59,6 +60,9 @@ module tb_top();
 	assign apb_intf.PREADY = w_pready;  
 	assign apb_intf.PSLVERR = w_pslverr; 
 
+	assign w_periph_tx_req = 'h7FFF_FFFF;
+	assign w_periph_rx_req = 'h7FFF_FFFF;
+	
 	dma_axi64_wrap u_dma_axi64_wrap(
 		.clk(clk_100MHz),
 		.reset(w_reset),
@@ -81,12 +85,22 @@ module tb_top();
 		.pready(w_pready)
 	);		
 	
-    
+    assign dma_perf_intf.periph_tx_req = w_periph_tx_req[1];
+    assign dma_perf_intf.periph_tx_clr = w_periph_tx_clr[1];
+    assign dma_perf_intf.periph_rx_req = w_periph_rx_req[1];
+    assign dma_perf_intf.periph_rx_clr = w_periph_rx_clr[1];
+    assign dma_perf_intf.WSTRB0 = u_dma_axi64_wrap.w_WSTRB0;
+    assign dma_perf_intf.WVALID0 = u_dma_axi64_wrap.w_WVALID0;
+    assign dma_perf_intf.WREADY0 = u_dma_axi64_wrap.w_WREADY0;
+    assign dma_perf_intf.RVALID0 = u_dma_axi64_wrap.w_RVALID0;
+    assign dma_perf_intf.RREADY0 = u_dma_axi64_wrap.w_RREADY0;
+	
                     
     // set interface in uvm config db 
     initial begin
         uvm_config_db#(virtual apb_interface)::set(null, "*", "APB_INTF", apb_intf);
-        // start the test
+        uvm_config_db#(virtual dma_perf_interface)::set(null, "*", "DMA_PERF_INTF", dma_perf_intf); 
+    // start the test
        run_test();
     end
 	

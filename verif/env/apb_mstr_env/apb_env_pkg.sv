@@ -12,7 +12,8 @@ package apb_env_pkg;
     
     // import agent_pkg
     import apb_agent_pkg::*;
-    
+    import dma_perf_pkg::*;
+	
     `include "tb_defines.sv"
     
     // include env files

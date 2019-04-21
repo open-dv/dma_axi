@@ -52,7 +52,7 @@ module dma_axi64_wrap(clk,reset,scan_en,idle,INT,periph_tx_req,periph_tx_clr,per
     wire                              w_RVALID0;
     wire                              w_RREADY0;
 
-	assign w_RDATA0 = 'h8;
+	assign w_RDATA0 = 'h20;
 	
 dma_axi64
 u_dma_axi64 (

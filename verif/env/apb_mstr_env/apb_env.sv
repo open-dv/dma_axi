@@ -15,6 +15,9 @@ class apb_environment extends uvm_env;
     // instance of agent
     apb_mstr_agent  apb_mstr_agnt;
     
+	dma_perf_monitor dma_perf_mon;
+	dma_perf_collector dma_perf_collect_h;
+	
     // constructor function
     function new(string name="apb_environment", uvm_component parent);
         super.new(name, parent);
@@ -32,6 +35,8 @@ class apb_environment extends uvm_env;
         // build agent
         apb_mstr_agnt = apb_mstr_agent::type_id::create("apb_mstr_agnt", this);
         
+		dma_perf_mon = dma_perf_monitor::type_id::create("dma_perf_mon", this);
+		dma_perf_collect_h = dma_perf_collector::type_id::create("dma_perf_collect_h", this);
         // build scoreboard if enabled
         if(apb_env_cfg.has_scoreboard) begin
             apb_scb = apb_scoreboard::type_id::create("apb_scb", this);
@@ -51,7 +56,8 @@ class apb_environment extends uvm_env;
             apb_mstr_agnt.apb_mntr.ap.connect(apb_scb.ap_mntr2scb);
             // connect driver and scoreboard
             apb_mstr_agnt.apb_mstr_drvr.drv2scb.connect(apb_scb.ap_drv2scb);
-        end    
+        end   
+        dma_perf_mon.req_clr_analysis_port.connect(dma_perf_collect_h.req_clr_port);		
     endfunction: connect_phase
     
     // run_phase
